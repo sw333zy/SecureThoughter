@@ -17,9 +17,9 @@
 
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">
-        </a><h2>Thoughter</h2></a>
+        <h2>Thoughter</h2></a>
     <span class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" href="/viewprofile">Welcome <span
+            <a class="nav-link" href="/viewprofile">Hello, <span
                     th:text="${#authentication.name}"></span></a></span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
