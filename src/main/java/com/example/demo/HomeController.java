@@ -51,19 +51,21 @@ public class HomeController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "/";
+        return "redirect:/login";
     }
 
     //home with list of messages
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("messages", messageRepository.findAll());
-        if(userService.getUser() != null) {
+        if (userService.getUser() != null) {
             model.addAttribute("user_id", userService.getUser().getId());
+            return "index";
         }
         return "index";
-    }
+
+}
 
     //login stuff
     @RequestMapping("/login")
@@ -132,6 +134,12 @@ public class HomeController {
     public String delCourse(@PathVariable("id") long id){
         messageRepository.deleteById(id);
         return "redirect:/";
+    }
+
+    @RequestMapping ("/viewprofile")
+    public String editprofile (Model model){
+        model.addAttribute("user",userService.getUser());
+        return "profile";
     }
 
 

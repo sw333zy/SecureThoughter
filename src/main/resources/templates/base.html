@@ -16,7 +16,11 @@
 <!--NAV BAR STUFF-->
 
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><h2>Thoughter</h2></a>
+    <a class="navbar-brand" href="/">
+        </a><h2>Thoughter</h2></a>
+    <span class="nav-item" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="/viewprofile">Welcome <span
+                    th:text="${#authentication.name}"></span></a></span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,7 +28,7 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
             <div sec:authorize="isAuthenticated()">
-                <a class="nav-item nav-link active" href="/add">New Thoughts <span class="sr-only">(current)</span></a></div>
+                <a class="nav-item nav-link active" href="/add">Add Thoughts <span class="sr-only">(current)</span></a></div>
             <a class="nav-item nav-link active" href="/">Recent Thoughts <span class="sr-only">(current)</span></a>
             <div sec:authorize="isAuthenticated()">
                 <a class="nav-item nav-link active" th:href="@{/logout}">Logout <span class="sr-only">(current)</span></a></div>
@@ -50,12 +54,16 @@
             <img th:src="${message.pic}"/>
             <hr/>
         </div>
-        <div sec:authorize="isAuthenticated()">
-            <div sec:authorize="hasAuthority('User')">
-                <div th:if="${user_id == message.user.id}">
-        <td><a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
-            <a th:href="@{/detail/{id}(id=${message.id})}">Details</a> -
-            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+        <td>
+            <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+            <div sec:authorize="isAuthenticated()">
+                <div sec:authorize="hasAuthority('USER')">
+                    <div th:if="${user_id == message.user.id}">
+                        <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
+                        <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                    </div>
+                </div>
+            </div>
         </td>
     </div>
 </div>
