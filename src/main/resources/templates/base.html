@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Security</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css"/>-->
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css"/>
 </head>
 <body>
 <!--END HEAD STUFF-->
@@ -48,7 +48,7 @@
         <blockquote class="blockquote mb-0">
             <p th:text="${message.content}"></p>
             <!--Concatenate different values like below and use the date formatting code to specify date view-->
-            <footer class="blockquote-footer" th:text="${message.postedBy + ' on ' + #dates.format(message.date, 'MMM-dd-yyyy')}"></footer>
+            <footer class="blockquote-footer" th:text="${message.user.username + ' on ' + #dates.format(message.date, 'MMM-dd-yyyy')}"></footer>
         </blockquote><br/>
         <div th:if="${message.pic} !=null">
             <img th:src="${message.pic}"/>

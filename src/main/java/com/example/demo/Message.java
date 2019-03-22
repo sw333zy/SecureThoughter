@@ -31,7 +31,6 @@ public class Message {
     private long id;
     private String title;
     private String content;
-    private String postedBy;
     private String pic;
     private Date date = new Date();
 
@@ -61,14 +60,6 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getPostedBy() {
-        return postedBy;
-    }
-
-    public void setPostedBy(String postedBy) {
-        this.postedBy = postedBy;
     }
 
     public Date getDate() {
