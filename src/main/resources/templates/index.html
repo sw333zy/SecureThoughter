@@ -7,7 +7,12 @@
 <h2>Insecure Page</h2>
 <div class="container"><nav th:replace="base :: navbar"></nav>
     <br/>
-    <a href="/add">Add a new thought?</a><br/>
+
+    <!--add thought for logged in user or admin-->
+    <div sec:authorize="isAuthenticated()">
+        <a href="/add">Add a new thought?</a><br/>
+    </div>
+
     <br/>
     <div th:each="message : ${messages}">
         <div th:replace="base :: message"></div>
@@ -15,7 +20,11 @@
     <nav th:replace="base :: foot"></nav>
     <th:block th:replace="base :: jslinks"></th:block>
 </div>
-<a href="/secure">Login Page</a>
+
+    <!--show only for non-logged-in users-->
+    <div sec:authorize="isAnonymous()">
+        <a href="/secure">Login Page</a>
+    </div>
 
 </body>
 </html>

@@ -23,7 +23,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="/add">New Thoughts <span class="sr-only">(current)</span></a>
+            <div sec:authorize="isAuthenticated()">
+                <a class="nav-item nav-link active" href="/add">New Thoughts <span class="sr-only">(current)</span></a></div>
             <a class="nav-item nav-link active" href="/">Recent Thoughts <span class="sr-only">(current)</span></a>
         </div>
     </div>
