@@ -21,6 +21,7 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
+
     @Autowired
     MessageRepository messageRepository;
 
@@ -50,7 +51,7 @@ public class HomeController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "index";
+        return "/";
     }
 
     //home with list of messages
@@ -58,6 +59,9 @@ public class HomeController {
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("messages", messageRepository.findAll());
+        if(userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "index";
     }
 
@@ -74,7 +78,7 @@ public class HomeController {
                 ((UsernamePasswordAuthenticationToken) principal)
                 .getPrincipal()).getUser();
                 model.addAttribute("myuser", myuser);
-                return "index";
+                return "redirect:/";
     }
 
     //message posting
@@ -89,6 +93,7 @@ public class HomeController {
     public String processMessage(@ModelAttribute Message message,
                                  @RequestParam("file") MultipartFile file){
         if (file.isEmpty()) {
+            message.setUser(userService.getUser());
             messageRepository.save(message);
             return "redirect:/";
         }
@@ -96,6 +101,7 @@ public class HomeController {
             Map uploadResult = cloudc.upload(file.getBytes(),
                     ObjectUtils.asMap("resourcetype", "auto"));
             message.setPic(uploadResult.get("url").toString());
+            message.setUser(userService.getUser());
             messageRepository.save(message);
         }catch (IOException e){
             e.printStackTrace();
@@ -110,6 +116,9 @@ public class HomeController {
     public String showCourse(@PathVariable("id") long id, Model model)
     {
         model.addAttribute("message", messageRepository.findById(id).get());
+        if(userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "show";
     }
 
