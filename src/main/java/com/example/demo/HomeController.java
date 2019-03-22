@@ -62,7 +62,7 @@ public class HomeController {
                 ((UsernamePasswordAuthenticationToken) principal)
                 .getPrincipal()).getUser();
                 model.addAttribute("myuser", myuser);
-                return "secure";
+                return "index";
     }
 
 }
