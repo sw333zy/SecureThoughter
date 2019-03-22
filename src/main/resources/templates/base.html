@@ -63,6 +63,11 @@
                         <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
                     </div>
                 </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
+                        <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                    </div>
+                </div>
             </div>
         </td>
     </div>
