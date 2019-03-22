@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head th:replace="base :: headstuff">
+</head>
+<body>
+
+
+<div class="container">
+    <nav th:replace="base :: navbar"></nav>
+
+    <h5>Post your thoughts</h5>
+    The time is: <i th:text="${execInfo.now.time}"></i><br/><br/>
+    <form method="POST" action="/add" th:object="${message}"
+          enctype="multipart/form-data">
+        <input th:field="*{id}" type="hidden"/>
+        <div class="form-group">
+            <label for="thoughtTitle"><b>Title</b></label>
+            <input class="form-control" id="thoughtTitle" placeholder="Name Your Thought" th:field="*{title}"
+                   type="text">
+            <span th:errors="*{title}"
+                  th:if="${#fields.hasErrors('title')}"></span><br/>
+        </div>
+
+        <div class="form-group">
+            <label for="thoughtContent"><b>Thought</b></label>
+            <textarea class="form-control" id="thoughtContent"  placeholder="Your Thought Here" rows="3" th:field="*{content}"></textarea>
+            <span th:errors="{content}"
+                  th:if="${#fields.hasErrors('content')}"></span><br/>
+        </div>
+
+        <div class="form-group">
+            <label for="postedBy"><b>Posted By</b></label>
+            <input class="form-control" id="postedBy" placeholder="@name" th:field="*{postedBy}" type="text">
+            <span th:errors="*{postedBy}"
+                  th:if="${#fields.hasErrors('postedBy')}"></span><br/>
+        </div>
+        <input type="file" name="file"/>
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <nav th:replace="base :: foot"></nav>
+    <th:block th:replace="base :: jslinks"></th:block>
+</div>
+
+</body>
+</html>

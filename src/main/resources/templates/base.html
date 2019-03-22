@@ -50,6 +50,9 @@
             <img th:src="${message.pic}"/>
             <hr/>
         </div>
+        <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="hasAuthority('User')">
+                <div th:if="${user_id == message.user.id}">
         <td><a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
             <a th:href="@{/detail/{id}(id=${message.id})}">Details</a> -
             <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
